@@ -22,8 +22,8 @@ const UsersList = () => {
       <ul className="user-list">
         {userList ?
           <>
-            {userList.map((username) => (
-              <li className="user-item">{username}</li>
+            {userList.map((username, index) => (
+              <li className="user-item" key={index}>{username}</li>
             ))}
           </>
           :

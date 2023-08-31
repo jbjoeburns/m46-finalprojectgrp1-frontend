@@ -91,7 +91,7 @@
 
 .welcome-container .logout {
   margin: 0px;
-  top: -20px;
+  top: -10px;
 }
 
 .toggle-container {
@@ -136,4 +136,5 @@
 .signin-message {
   position: relative;
   top: -15px;
+  margin-bottom: 50px;
 }

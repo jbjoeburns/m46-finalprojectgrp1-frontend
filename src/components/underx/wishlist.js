@@ -2,6 +2,7 @@ import "./underx.css"
 import { useEffect, useState } from "react"
 import * as React from "react"
 import { removeWishList } from "../../utils"
+import "../../global.css"
 
 const Wishlist = (props) => {
   const [allCharacters, setAllCharacters] = useState([])
@@ -113,29 +114,29 @@ const Wishlist = (props) => {
   return (
     <div className="containerbox">
       <br></br>
-      <h1 id="headerStyle">{props.titleText}
+      <h1 className="headerStyle">{props.titleText}
       </h1>
       {errorMsg && <h3>{errorMsg}</h3>}
       {open ?
         <div></div> :
-        <div id="popUpBox">
-          <div id="xStyle" onClick={() => handleClose()}>❌</div>
-          <div id="saleText">Game: {saleGameTitle}</div>
-          <div id="saleText">Price: ${saleVal} <del>${origVal}</del></div>
+        <div className="popUpBox">
+          <div className="xStyle" onClick={() => handleClose()}>❌</div>
+          <div className="saleText">Game: {saleGameTitle}</div>
+          <div className="saleText">Price: ${saleVal} <del>${origVal}</del></div>
           <h1>Cheapest ever price: ${gameLookUp.cheapestPriceEver.price}</h1>
-          <div id="saleText">{discount}% OFF!!</div>
+          <div className="saleText">{discount}% OFF!!</div>
           <br></br>
-          <b id="headerStyle" className="wishlistMO" onClick={() => HandleWishlist(steamAppID)}>Remove from wishlist</b>
+          <b className="headerStyle wishlistMO" onClick={() => HandleWishlist(steamAppID)}>Remove from wishlist</b>
           <br></br>
           <br></br>
           <h1>Stores (cheapest to most expensive)</h1>
-          <div id="diffStoreArray">
+          <div className="diffStoreArray">
             {dealLookUp.map((store, index) => {
               let storeIDForURL = store.storeID - 1
               let storeURL = "https://www.cheapshark.com/img/stores/banners/".concat(storeIDForURL).concat(".png")
               if (store.price =! store.retailPrice) {
                 return (
-                  <div id="buttonStyling" key={index}>
+                  <div className="buttonStyling" key={index}>
                     <img href={index} key={index} src={storeURL} alt={index}></img>
                     <p>Current Price: ${store.price}</p>
                     <p>Retail Price: ${store.retailPrice}</p>
@@ -145,14 +146,14 @@ const Wishlist = (props) => {
             })}
           </div>
         </div>}
-      <div id="buttonContainer">
+      <div className="buttonContainer">
         {allCharacters.length === 0 &&
-          <div id="headerStyle">No sales...</div>
+          <div className="headerStyle">No sales...</div>
         }
         {allCharacters.map((game, index) => {
           return (
             <div key={index}>
-              <button id="buttonStyling" className="buttonStyleRemove" onClick={() => handleClick(game)}>
+              <button className="buttonStyling buttonStyleRemove" onClick={() => handleClick(game)}>
                 <img href={index} src={game.thumb} alt={index}></img>
                 <p><del>${game.normalPrice}</del></p>
                 <p>${game.salePrice}</p>
