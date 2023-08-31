@@ -2,13 +2,16 @@ import "./underx.css"
 import { useEffect, useState } from "react"
 import * as React from "react"
 import { addWishList } from "../../utils"
+import { useNavigate } from "react-router-dom";
+
 
 const Underx = (props) => {
+  const navigate = useNavigate();
   const [pageNum, setpageNum] = useState(0)
   const [allCharacters, setAllCharacters] = useState([])
   const [gameLookUp, setGameLookUp] = useState(null)
   const [dealLookUp, setDealLookUp] = useState(null)
-  const [gameID, setGameID] = useState(143325)
+  const [gameID, setGameID] = useState(1)
   const [errorMsg, setErrorMsg] = useState(null)
   const [steamAppID, setSteamAppID] = useState(null)
   const [saleVal, setSaleVal] = useState(null)
@@ -68,7 +71,6 @@ const Underx = (props) => {
     setVarchange(!varChange)  
     let gameSaleID = game.gameID
     setGameID(gameSaleID)
-    alert(gameSaleID)
     console.log(gameID)
     let gameSaleprice = game.salePrice
     let gameOrigPrice = game.normalPrice
@@ -107,6 +109,9 @@ const Underx = (props) => {
   }
 
   function HandleWishlist(steamAppID) {
+    if (props.isLoggedIn === false) {
+      navigate('/login-register');
+    }
     let wishListSteamIDsArray = props.wishListArray
 
     wishListSteamIDsArray.concat(steamAppID)
