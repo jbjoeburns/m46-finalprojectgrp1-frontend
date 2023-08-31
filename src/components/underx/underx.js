@@ -2,13 +2,16 @@ import "./underx.css"
 import { useEffect, useState } from "react"
 import * as React from "react"
 import { addWishList } from "../../utils"
+import { useNavigate } from "react-router-dom";
+
 
 const Underx = (props) => {
+  const navigate = useNavigate();
   const [pageNum, setpageNum] = useState(0)
   const [allCharacters, setAllCharacters] = useState([])
   const [gameLookUp, setGameLookUp] = useState(null)
   const [dealLookUp, setDealLookUp] = useState(null)
-  const [gameID, setGameID] = useState(null)
+  const [gameID, setGameID] = useState(1)
   const [errorMsg, setErrorMsg] = useState(null)
   const [steamAppID, setSteamAppID] = useState(null)
   const [saleVal, setSaleVal] = useState(null)
@@ -16,7 +19,7 @@ const Underx = (props) => {
   const [discount, setDiscount] = useState(null)
   const [saleGameTitle, setSaleTitle] = useState(null)
   const [open, setOpen] = useState(true)
-
+  const [varChange, setVarchange] = useState(true)
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -52,31 +55,39 @@ const Underx = (props) => {
 
         setDealLookUp(dealData)
         setGameLookUp(data)
+        // console.log(response)
+        // console.log(data)
+        console.log(gameLookUp)
       } catch (err) {
         console.log(err)
         setErrorMsg(err)
       }
     }
     fetchData()
-  }, [gameID])
+    
+  }, [gameID, varChange])
 
   function handleClick(game) {
+    setVarchange(!varChange)  
     let gameSaleID = game.gameID
-
     setGameID(gameSaleID)
-
+    console.log(gameID)
     let gameSaleprice = game.salePrice
     let gameOrigPrice = game.normalPrice
     let gameDiscount = Math.round(game.savings)
     let gameTitle = game.title
     let steamAppID = game.steamAppID
-
     setSaleVal(gameSaleprice)
     setOrigVal(gameOrigPrice)
     setDiscount(gameDiscount)
     setSaleTitle(gameTitle)
     setSteamAppID(steamAppID)
+    updateFunction(gameID)
     setOpen(!open)
+  }
+
+  function updateFunction(updateVal) {
+    console.log(updateVal)
   }
 
   function handleClose() {
@@ -98,6 +109,9 @@ const Underx = (props) => {
   }
 
   function HandleWishlist(steamAppID) {
+    if (props.isLoggedIn === false) {
+      navigate('/login-register');
+    }
     let wishListSteamIDsArray = props.wishListArray
 
     wishListSteamIDsArray.concat(steamAppID)
@@ -119,7 +133,7 @@ const Underx = (props) => {
       <br></br>
       <h1 id="headerStyle">{props.titleText}
       </h1>
-      {errorMsg && <h3>{errorMsg}</h3>}
+      {/* {errorMsg && <h3>{errorMsg}</h3>} */}
       {open ?
         <div></div> :
         <div id="popUpBox">
@@ -149,7 +163,8 @@ const Underx = (props) => {
             })}
           </div>
 
-        </div>}
+        </div>
+        }
       <div id="buttonContainer">
         <button id="buttonStyling" className="buttonStyleRemove1" onClick={() => handlePrev()}><b>&#9664;</b></button>
         {allCharacters.length === 0 &&
