@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import * as React from "react"
 import { addWishList } from "../../utils"
 import { useNavigate } from "react-router-dom";
-
+import { motion, AnimatePresence } from "framer-motion"
 
 const Underx = (props) => {
   const navigate = useNavigate();
@@ -173,6 +173,7 @@ const Underx = (props) => {
 
         {allCharacters.map((game, index) => {
           return (
+          
             <div className="games-container" key={index}>
               <button id="buttonStyling" className="buttonStyleRemove" onClick={() => handleClick(game)}>
                 <img href={index} src={game.thumb} alt=""></img>
