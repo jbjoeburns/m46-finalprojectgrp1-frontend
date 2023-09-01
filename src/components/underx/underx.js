@@ -4,7 +4,6 @@ import * as React from "react"
 import { addWishList } from "../../utils"
 import { useNavigate } from "react-router-dom";
 
-
 const Underx = (props) => {
   const navigate = useNavigate();
   const [pageNum, setpageNum] = useState(0)
@@ -173,6 +172,7 @@ const Underx = (props) => {
 
         {allCharacters.map((game, index) => {
           return (
+          
             <div className="games-container" key={index}>
               <button id="buttonStyling" className="buttonStyleRemove" onClick={() => handleClick(game)}>
                 <img href={index} src={game.thumb} alt=""></img>

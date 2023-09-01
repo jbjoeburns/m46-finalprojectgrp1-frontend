@@ -10,7 +10,7 @@ const SearchPage = () => {
   const [allCharacters, setAllCharacters] = useState([])
   const [gameLookUp, setGameLookUp] = useState(null)
   const [dealLookUp, setDealLookUp] = useState(null)
-  const [gameID, setGameID] = useState(null)
+  const [gameID, setGameID] = useState(1)
   const [errorMsg, setErrorMsg] = useState(null)
   const [steamAppID, setSteamAppID] = useState(null)
   const [saleVal, setSaleVal] = useState(null)
@@ -132,7 +132,7 @@ const SearchPage = () => {
       <br></br>
       <h1 id="headerStyle">Search Results
       </h1>
-      {errorMsg && <h3>{errorMsg}</h3>}
+      {/* {errorMsg && <h3>{errorMsg}</h3>} */}
       {open ?
         <div></div> :
         <div id="popUpBox">
