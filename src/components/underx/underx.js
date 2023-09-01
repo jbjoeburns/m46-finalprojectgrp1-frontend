@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import * as React from "react"
 import { addWishList } from "../../utils"
 import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion"
 
 const Underx = (props) => {
   const navigate = useNavigate();
